@@ -25,14 +25,12 @@ public class Methods {
 		// Switch block calls the method corresponding to user input on line 40.
 		switch (option) {
 		case 1:
-			// Makes a call to a method in the SearchMethods class.
 			searchEntries();
 			break;
 		case 2:
 			addEntry();
 			break;
 		case 3:
-			// Makes a call to a method in the ModifyMethod class.
 			updateEntry();
 			break;
 		case 4:

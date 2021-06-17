@@ -37,13 +37,11 @@ public class Index {
 
 	public static void main(String[] args) {
 		// Make a call to the "addTestCases" function to populate the array with the
-		// test
-		// case Person objects.
+		// test case Person objects.
 		addTestCases();
 
 		// The main method of this application simply makes a call to the "mainMenu"
-		// method
-		// in the "Methods" class.
+		// method.
 		Methods.mainMenu();
 
 	}
