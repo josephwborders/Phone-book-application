@@ -18,7 +18,7 @@ public class Methods {
 		System.out.println("4. Delete an entry");
 		System.out.println("5. View all entries");
 		System.out.println("6. Exit");
-		System.out.print("Enter the number corresponding to your choice: \n");
+		System.out.print("\nEnter the number corresponding to your choice: \n");
 
 		int option = Index.in.nextInt();
 
@@ -94,7 +94,7 @@ public class Methods {
 	public static void searchEntries() {
 		// Print a list of search types and prompt the user to select one based on its
 		// numerical position in the list.
-		System.out.println("Choose a search parameter: ");
+		System.out.println("\nChoose a search parameter: ");
 		System.out.println("1. First name");
 		System.out.println("2. Last name");
 		System.out.println("3. Telephone number");
@@ -129,7 +129,7 @@ public class Methods {
 
 	// Method to search for Person object entries by first name.
 	public static void firstNameSearch() {
-		System.out.print("Enter the first name: ");
+		System.out.print("\nEnter the first name: ");
 		String userIn = Index.in.next();
 		// For each loop calls the "getFirstName" method from the Person class and
 		// compares the returned value to user input. Matching person objects are 
@@ -354,15 +354,16 @@ public class Methods {
 		// Print a numbered list of Person objects using for each loop.
 		int num = 1;
 		for (Object entry : Index.phoneBookArray) {
-			System.out.println(num + ". " + entry);
+			System.out.println(num + ". " + entry + "\n-------------------------");
 			num++;
 		}
 		int contact = Index.in.nextInt();
 		// Decrement user input to match array index position.
 		contact--;
 		// Print the selected contact and prompt the user to confirm intent to delete.
-		System.out.println(Index.phoneBookArray[contact].toString() + "\n"
-				+ "Are you sure you want to delete this contact? (Y/N)");
+		System.out.println(Index.phoneBookArray[contact].toString() + 
+				"\n---------------------------"
+				+ "\n***Are you sure you want to delete this contact? (Y/N)***");
 		String delete = Index.in.next();
 
 		if (delete.equalsIgnoreCase("Y")) {
