@@ -64,7 +64,7 @@ public class Person extends Address {
 	//the toString method in the parent/super Address class to return those attributes as well.
 	@Override
 	public String toString() {
-		return firstName + " " + middleName + " " + lastName + ", Tel: " + telephoneNumber + ", " + super.toString() + ".";
+		return firstName + " " + middleName + " " + lastName + ", \n" + super.toString() + "\nTel: " + telephoneNumber;
 	}
 
 }

@@ -62,7 +62,7 @@ abstract class Address {
 	//and provides formatted output of Address attribute values.
 	@Override
 	public String toString() {
-		return street + ", " + city + ", " + state + " " + zipCode;
+		return street + ", \n" + city + ", " + state + ", " + zipCode;
 	}
 
 }

@@ -18,7 +18,7 @@ public class Methods {
 		System.out.println("4. Delete an entry");
 		System.out.println("5. View all entries");
 		System.out.println("6. Exit");
-		System.out.print("Enter the number corresponding to your choice: ");
+		System.out.print("Enter the number corresponding to your choice: \n");
 
 		int option = Index.in.nextInt();
 
@@ -58,7 +58,7 @@ public class Methods {
 	// in the object array declared in the Index class.
 	public static void viewAll() {
 		for (Object entry : Index.phoneBookArray) {
-			System.out.println(entry.toString());
+			System.out.println(entry.toString() + "\n-------------------------");
 		}
 		// Prompt the user for a decision whether to continue, or terminate the
 		// application.
@@ -220,7 +220,7 @@ public class Methods {
 		// Create new person object to be added to the phone book array.
 		Person entry3 = new Person();
 
-		System.out.println("***Add New Phone Book Entry***");
+		System.out.println("\n***Add New Phone Book Entry***");
 
 		// Collect user input and assign to the new Person object using setters.
 		System.out.println("Enter first name: ");
@@ -261,7 +261,7 @@ public class Methods {
 		// Copy temporary array to phone book array in the Index class.
 		Index.phoneBookArray = addEntryArray;
 		// Print new array and confirm it has been added to the phone book.
-		System.out.println(entry3.toString() + "\n ***The entry has been added to the" + " phone book");
+		System.out.println(entry3.toString() + "\n ***The entry has been added to the phone book***\n");
 		// Ask the user whether to continue using the phone book, and return to the
 		// main menu if "Y" is entered.
 		continueUsing();
