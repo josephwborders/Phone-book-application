@@ -134,7 +134,7 @@ public class Methods {
 		//printed to the console.
 		for (Person entry : Index.phoneBookArray) {
 			if (entry.getFirstName().equalsIgnoreCase(userIn)) {
-				System.out.println(entry);
+				System.out.println((entry) + "\n-------------------------");
 			}
 		}
 		System.out.println("***End of Search Results***");
@@ -152,7 +152,7 @@ public class Methods {
 		//printed to the console.
 		for (Person entry : Index.phoneBookArray) {
 			if (entry.getLastName().equalsIgnoreCase(userIn)) {
-				System.out.println(entry);
+				System.out.println((entry) + "\n-------------------------");
 			}
 		}
 		System.out.println("***End of Search Results***");
@@ -170,7 +170,7 @@ public class Methods {
 		//printed to the console.
 		for (Person entry : Index.phoneBookArray) {
 			if (entry.getTelephoneNumber().equals(userIn)) {
-				System.out.println(entry);
+				System.out.println((entry) + "\n-------------------------");
 			}
 		}
 		System.out.println("***End of Search Results***");
@@ -188,7 +188,7 @@ public class Methods {
 		// console.
 		for (Person entry : Index.phoneBookArray) {
 			if (entry.getCity().equalsIgnoreCase(userIn)) {
-				System.out.println(entry);
+				System.out.println((entry) + "\n-------------------------");
 			}
 		}
 		System.out.println("***End of Search Results***");
@@ -206,7 +206,7 @@ public class Methods {
 		// console.
 		for (Person entry : Index.phoneBookArray) {
 			if (entry.getState().equalsIgnoreCase(userIn)) {
-				System.out.println(entry);
+				System.out.println((entry) + "\n-------------------------");
 			}
 		}
 		// Ask the user whether to continue using the phone book, and return to the
