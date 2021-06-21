@@ -1,7 +1,13 @@
 package phoneBookPkg;
 
 import java.util.Scanner;
-
+/**
+ * Console-operated phone book application to demonstrate core java understanding
+ * as well as object oriented programming. 
+ *
+ * @author Joseph Borders
+ *
+ */
 public class Index {
 
 	// Declare global object array to store person entries. Array is declared in the

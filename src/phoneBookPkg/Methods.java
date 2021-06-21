@@ -20,39 +20,55 @@ public class Methods {
 		System.out.println("6. Exit");
 		System.out.print("\nEnter the number corresponding to your choice: \n");
 
-		int option = Index.in.nextInt();
+		// Try/catch to handle error if user input is not an integer.
+		try {
+			String option = Index.in.next();
 
-		// Switch block calls the method corresponding to user input on line 40.
-		switch (option) {
-		case 1:
-			searchEntries();
-			break;
-		case 2:
-			addEntry();
-			break;
-		case 3:
-			updateEntry();
-			break;
-		case 4:
-			deleteEntry();
-			break;
-		case 5:
-			viewAll();
-			break;
-		case 6:
-			exitPhonebook();
-			break;
-		default:
-			// Default case provides error handling in case user input does not match a
-			// valid case.
-			System.out.println("\n***Please choose a number from 1 to 5.***\n");
-			mainMenu();
-			break;
+			// Parse string input to integer for matching to a case in the switch block.
+			int switchCaseOption = Integer.parseInt(option);
+
+			// Switch block calls the method corresponding to user input on line 40.
+			switch (switchCaseOption) {
+			case 1:
+				searchEntries();
+				break;
+			case 2:
+				addEntry();
+				break;
+			case 3:
+				updateEntry();
+				break;
+			case 4:
+				deleteEntry();
+				break;
+			case 5:
+				viewAll();
+				break;
+			case 6:
+				exitPhonebook();
+				break;
+			default:
+				// Default case provides error handling in case user input does not match a
+				// valid case.
+				System.out.println("\n***Please choose a number from 1 to 5.***\n");
+				mainMenu();
+				break;
+			}
+			// Catch block handles handles errors if user input does not match a switch
+			// case, or the default.
+		} catch (NumberFormatException e) {
+			System.out.println("\n***Invalid entry. Please choose a number from 1 to 5.***\n");
+			// Make a call to the continueUsing method to ask whether the user would like to
+			// continue
+			// using the phone book/try again with valid input.
+			continueUsing();
 		}
+
 	}
 
 	// The "viewAll" method is called by case 5 in the switch block of the "mainMenu
-	// method. It uses a for each loop and the toString() method to display all elements
+	// method. It uses a for each loop and the toString() method to display all
+	// elements
 	// in the object array declared in the Index class.
 	public static void viewAll() {
 		for (Object entry : Index.phoneBookArray) {
@@ -64,8 +80,9 @@ public class Methods {
 	}
 
 	// The "exitPhonebook" method is called by case 6 in the switch block of the
-	// "mainMenu" method. It makes a call to the "continueUsing" method which 
-	//prompts the user for a decision whether to continue, or terminate the application.
+	// "mainMenu" method. It makes a call to the "continueUsing" method which
+	// prompts the user for a decision whether to continue, or terminate the
+	// application.
 	public static void exitPhonebook() {
 		continueUsing();
 	}
@@ -98,30 +115,44 @@ public class Methods {
 		System.out.println("3. Telephone number");
 		System.out.println("4. City");
 		System.out.println("5. State");
-		int searchType = Index.in.nextInt();
 
-		// Switch block calls the method corresponding to user input on line 15.
-		switch (searchType) {
-		case 1:
-			firstNameSearch();
-			break;
-		case 2:
-			lastNameSearch();
-			break;
-		case 3:
-			telephoneNumberSearch();
-			break;
-		case 4:
-			citySearch();
-			break;
-		case 5:
-			stateSearch();
-			break;
-		default:
-			System.out.println("\n***Please choose a number from 1 to 6.***\n");
-			//Default case handles errors if user input is not a number from 1 to 
-			//6, and redirects back to the start of the serachEntries method.
-			searchEntries();
+		// Try/catch to handle error if user input is not an integer.
+		try {
+			String option = Index.in.next();
+
+			// Parse string input to integer for matching to a case in the switch block.
+			int switchCaseOption = Integer.parseInt(option);
+			// Switch block calls the method corresponding to user input on line 15.
+			switch (switchCaseOption) {
+			case 1:
+				firstNameSearch();
+				break;
+			case 2:
+				lastNameSearch();
+				break;
+			case 3:
+				telephoneNumberSearch();
+				break;
+			case 4:
+				citySearch();
+				break;
+			case 5:
+				stateSearch();
+				break;
+			default:
+				System.out.println("\n***Please choose a number from 1 to 6.***\n");
+				// Default case handles errors if user input is not a number from 1 to
+				// 6, and redirects back to the start of the serachEntries method.
+				searchEntries();
+			}
+			// Catch block handles handles errors if user input does not match a switch
+			// case, or the default.
+		} catch (NumberFormatException e) {
+			System.out.println("\n***Invalid entry. Please choose a number from 1 to 5.***\n");
+			// Make a call to the continueUsing method to ask whether the user would like to
+			// continue
+			// using the phone book/try again with valid input.
+			continueUsing();
 		}
 	}
 
@@ -130,8 +161,8 @@ public class Methods {
 		System.out.print("\nEnter the first name: ");
 		String userIn = Index.in.next();
 		// For each loop calls the "getFirstName" method from the Person class and
-		// compares the returned value to user input. Matching person objects are 
-		//printed to the console.
+		// compares the returned value to user input. Matching person objects are
+		// printed to the console.
 		for (Person entry : Index.phoneBookArray) {
 			if (entry.getFirstName().equalsIgnoreCase(userIn)) {
 				System.out.println((entry) + "\n-------------------------");
@@ -148,8 +179,8 @@ public class Methods {
 		System.out.print("Enter the last name: ");
 		String userIn = Index.in.next();
 		// For each loop calls the "getLastName" method from the Person class and
-		// compares the returned value to user input. Matching person objects are 
-		//printed to the console.
+		// compares the returned value to user input. Matching person objects are
+		// printed to the console.
 		for (Person entry : Index.phoneBookArray) {
 			if (entry.getLastName().equalsIgnoreCase(userIn)) {
 				System.out.println((entry) + "\n-------------------------");
@@ -166,8 +197,8 @@ public class Methods {
 		System.out.print("Enter the telephone number in the following format: (123) 456-7890");
 		String userIn = Index.in.next();
 		// For each loop calls the "getTelephoneNumber" method from the Person class and
-		// compares the returned value to user input. Matching person objects are 
-		//printed to the console.
+		// compares the returned value to user input. Matching person objects are
+		// printed to the console.
 		for (Person entry : Index.phoneBookArray) {
 			if (entry.getTelephoneNumber().equals(userIn)) {
 				System.out.println((entry) + "\n-------------------------");
@@ -359,8 +390,7 @@ public class Methods {
 		// Decrement user input to match array index position.
 		contact--;
 		// Print the selected contact and prompt the user to confirm intent to delete.
-		System.out.println(Index.phoneBookArray[contact].toString() + 
-				"\n---------------------------"
+		System.out.println(Index.phoneBookArray[contact].toString() + "\n---------------------------"
 				+ "\n***Are you sure you want to delete this contact? (Y/N)***");
 		String delete = Index.in.next();
 
