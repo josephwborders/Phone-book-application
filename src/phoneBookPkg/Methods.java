@@ -310,65 +310,81 @@ public class Methods {
 		// from.
 		System.out.println("Select a field to edit by choosing its number. \n1. First name\n2. Middle name"
 				+ "\n3. Last name\n4. Telephone number\n5. Street\n6. City\n7. State\n8. Zip code");
-		int field = Index.in.nextInt();
 
-		// Switch block calls the setter method which corresponds to the user's choice
-		// and allows the value to be re-assigned with user input.
-		switch (field) {
-		case 1:
-			// Make a call to the setFirstName method in the Person class.
-			System.out.println("Enter the new first name: ");
-			String newFirstName = Index.in.next();
-			Index.phoneBookArray[contact].setFirstName(newFirstName);
-			break;
-		case 2:
-			// Make a call to the setMiddleName method in the Person class.
-			System.out.println("Enter the new middle name: ");
-			String newMiddleName = Index.in.next();
-			Index.phoneBookArray[contact].setMiddleName(newMiddleName);
-			break;
-		case 3:
-			// Make a call to the setLastName method in the Person class.
-			System.out.println("Enter the new last name: ");
-			String newLastName = Index.in.next();
-			Index.phoneBookArray[contact].setLastName(newLastName);
-			break;
-		case 4:
-			// Make a call to the setTelephoneNumber method in the Person class.
-			System.out.println("Enter the new telephone number in the following format: (123) 456-7890 ");
-			String newTel = Index.in.next();
-			Index.phoneBookArray[contact].setTelephoneNumber(newTel);
-			break;
-		case 5:
-			// Make a call to the setStreet method in the Address class.
-			System.out.println("Enter the new street address: ");
-			String newStreet = Index.in.next();
-			Index.phoneBookArray[contact].setStreet(newStreet);
-			break;
-		case 6:
-			// Make a call to the setCity method in the Address class.
-			System.out.println("Enter the new city: ");
-			String newCity = Index.in.next();
-			Index.phoneBookArray[contact].setCity(newCity);
-			break;
-		case 7:
-			// Make a call to the setState method in the Address class.
-			System.out.println("Enter the new state abbreviation. Example: FL ");
-			String newState = Index.in.next();
-			Index.phoneBookArray[contact].setState(newState);
-			break;
-		case 8:
-			// Make a call to the setZipCode method in the Address class.
-			System.out.println("Enter the new zip code: ");
-			String newZip = Index.in.next();
-			Index.phoneBookArray[contact].setZipCode(newZip);
-			break;
-		default:
-			// Handle errors if user input does not match any cases, and redirect
-			// back to the start of the updateEntry method.
-			System.out.println("Please choose a field number from 1 to 8.");
-			updateEntry();
-			break;
+		// Try/catch to handle error if user input is not an integer.
+		try {
+			String field = Index.in.next();
+
+			// Parse string input to integer for matching to a case in the switch block.
+			int switchCaseField = Integer.parseInt(field);
+
+			// Switch block calls the setter method which corresponds to the user's choice
+			// and allows the value to be re-assigned with user input.
+			switch (switchCaseField) {
+			case 1:
+				// Make a call to the setFirstName method in the Person class.
+				System.out.println("Enter the new first name: ");
+				String newFirstName = Index.in.next();
+				Index.phoneBookArray[contact].setFirstName(newFirstName);
+				break;
+			case 2:
+				// Make a call to the setMiddleName method in the Person class.
+				System.out.println("Enter the new middle name: ");
+				String newMiddleName = Index.in.next();
+				Index.phoneBookArray[contact].setMiddleName(newMiddleName);
+				break;
+			case 3:
+				// Make a call to the setLastName method in the Person class.
+				System.out.println("Enter the new last name: ");
+				String newLastName = Index.in.next();
+				Index.phoneBookArray[contact].setLastName(newLastName);
+				break;
+			case 4:
+				// Make a call to the setTelephoneNumber method in the Person class.
+				System.out.println("Enter the new telephone number in the following format: (123) 456-7890 ");
+				String newTel = Index.in.next();
+				Index.phoneBookArray[contact].setTelephoneNumber(newTel);
+				break;
+			case 5:
+				// Make a call to the setStreet method in the Address class.
+				System.out.println("Enter the new street address: ");
+				String newStreet = Index.in.next();
+				Index.phoneBookArray[contact].setStreet(newStreet);
+				break;
+			case 6:
+				// Make a call to the setCity method in the Address class.
+				System.out.println("Enter the new city: ");
+				String newCity = Index.in.next();
+				Index.phoneBookArray[contact].setCity(newCity);
+				break;
+			case 7:
+				// Make a call to the setState method in the Address class.
+				System.out.println("Enter the new state abbreviation. Example: FL ");
+				String newState = Index.in.next();
+				Index.phoneBookArray[contact].setState(newState);
+				break;
+			case 8:
+				// Make a call to the setZipCode method in the Address class.
+				System.out.println("Enter the new zip code: ");
+				String newZip = Index.in.next();
+				Index.phoneBookArray[contact].setZipCode(newZip);
+				break;
+			default:
+				// Handle errors if user input does not match any cases, and redirect
+				// back to the start of the updateEntry method.
+				System.out.println("Please choose a field number from 1 to 8.");
+				updateEntry();
+				break;
+			}
+			
+		// Catch block handles handles errors if user input does not match a switch
+		// case, or the default.
+		} catch (NumberFormatException e) {
+			System.out.println("\n***Invalid entry. Please choose a number from 1 to 5.***\n");
+			// Make a call to the continueUsing method to ask whether the user would like to
+			// continue
+			// using the phone book/try again with valid input.
+			continueUsing();
 		}
 		System.out.println(
 				Index.phoneBookArray[contact].toString() + "\n" + "***The contact information has been updated***");
