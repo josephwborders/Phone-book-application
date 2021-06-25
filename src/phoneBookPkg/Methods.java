@@ -1,7 +1,14 @@
 package phoneBookPkg;
 
-import java.util.Scanner;
 
+import java.util.Scanner;
+/**
+ * Console-operated phone book application to demonstrate core java understanding
+ * as well as object oriented programming. 
+ *
+ * @author Joseph Borders
+ *
+ */
 //This class contains the principal methods for the application, and makes calls to methods
 //in the SearchMethods and ModifyMethods class when needed.
 public class Methods {
@@ -279,7 +286,7 @@ public class Methods {
 				+ "***Note*** Do not use periods to abbreviate (i.e. St. Loius, 123 Main St.) Enter 'none' if no middle name.\n"
 				+ "Example: Jim, Jeffrey, Jones, 2124567890, 123 Main St, St Loius, MO, 65847\n"
 				+ "----------------------------------------------------------------\n"
-				+ "2. Enter each parameter individually, one by one."
+				+ "2. Enter each parameter individually, one by one.\n"
 				+ "----------------------------------------------------------------\n");
 		//Collect input to be used in the upcoming switch statement.
 		int entryMethod = Index.in.nextInt();
@@ -308,7 +315,7 @@ public class Methods {
 		System.out.print(
 		"Enter the contact information on one line exactly as follows:\n"
 		+ "First, Middle, Last, Street, Telephone Number, Street Address, City, State, Zip Code\n"
-		+ "***Note*** Do not use periods to abbreviate (i.e. St. Loius, 123 Main St.)\n "
+		+ "***Note*** Do not use periods to abbreviate (i.e. St. Loius, 123 Main St.)\n"
 		+ "Enter 'none' if no middle name.\n"
 		+ "Example: Jim, (none), Jones, 2124567890, 123 Main St, St Loius, MO, 65847\n"
 		+ "------------------------------------------------------------------------------------\n"
@@ -329,18 +336,21 @@ public class Methods {
 		String firstName = entryArray[0];
 		String middleName = entryArray[1];
 		String lastName = entryArray[2];
-		String phone = entryArray[3];
+		String telephoneNumber = entryArray[3];
 		String street = entryArray[4];
 		String city = entryArray[5];
 		String state = entryArray[6];
 		String zipCode = entryArray[7];
+		
+		//Format telephone number to correctly display it using a custom to string method on line 375.
+		String formattedTelNo = telNoToString(telephoneNumber);
 		
 		//Create temporary object array with an index 1 size larger than the phone book array in the Index class.
 		int indexPlus = Index.phoneBookArray.length + 1;
 		//Initialize temporary array.
 		Person[] tempArray = new Person[indexPlus];
 		//Create new person object using parameterized constructor.
-		Person addContact = new Person(firstName, middleName, lastName, phone, street, city, state, zipCode);
+		Person addContact = new Person(firstName, middleName, lastName, formattedTelNo, street, city, state, zipCode);
 
 		// Copy the array from the Index class into the temporary array using for loop.
 		int i;
@@ -361,6 +371,14 @@ public class Methods {
 		input.close();
 		
 		}
+	
+	public static String telNoToString(String telephoneNumber) {
+		
+		String formattedTelNo = "(" + telephoneNumber.charAt(0) + telephoneNumber.charAt(1) + telephoneNumber.charAt(2)
+			+ ") " + telephoneNumber.charAt(3) + telephoneNumber.charAt(4) + telephoneNumber.charAt(5) + "-" + telephoneNumber.charAt(6)
+			+ telephoneNumber.charAt(7) + telephoneNumber.charAt(8) + telephoneNumber.charAt(9);
+		return formattedTelNo;
+	}
 	
 	public static void addEntryParam() {
 		//Create local scanner object to be used for this method only. The global scanner

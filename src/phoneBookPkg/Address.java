@@ -1,5 +1,11 @@
 package phoneBookPkg;
-
+/**
+ * Console-operated phone book application to demonstrate core java understanding
+ * as well as object oriented programming. 
+ *
+ * @author Joseph Borders
+ *
+ */
 //Address is the parent/super class of the Person class. Its attributes and methods will
 //be inherited by the Person class.
 

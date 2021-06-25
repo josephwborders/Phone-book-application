@@ -1,5 +1,11 @@
 package phoneBookPkg;
-
+/**
+ * Console-operated phone book application to demonstrate core java understanding
+ * as well as object oriented programming. 
+ *
+ * @author Joseph Borders
+ *
+ */
 //Person is the child/sub-class of the Address class. It inherits the attributes and methods 
 //of the Address class. Objects of this class are stored in the Object Array in the Methods class.
 
