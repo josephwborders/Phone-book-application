@@ -1,5 +1,7 @@
 package phoneBookPkg;
 
+import java.util.Scanner;
+
 //This class contains the principal methods for the application, and makes calls to methods
 //in the SearchMethods and ModifyMethods class when needed.
 public class Methods {
@@ -33,7 +35,7 @@ public class Methods {
 				searchEntries();
 				break;
 			case 2:
-				addEntry();
+				chooseEntryMethod();
 				break;
 			case 3:
 				updateEntry();
@@ -65,12 +67,31 @@ public class Methods {
 		}
 
 	}
-
+	public static void sortArray() {
+		//Sort temporary array alphabetically by first name using nested for loops.
+		//The array is first sorted by the first letter of the first name belonging 
+		//to each person object.
+		int n = Index.phoneBookArray.length;
+		
+		for (int i = 0; i < n - 1; i++) {
+			for (int j = 0; j < n - i - 1; j++) {
+					if (Index.phoneBookArray[j].getFirstName().compareTo(Index.phoneBookArray[j + 1].getFirstName()) >1 ) {
+							Person temp = Index.phoneBookArray[j];
+							Index.phoneBookArray[j] = Index.phoneBookArray[j + 1];
+							Index.phoneBookArray[j + 1] = temp;
+					}
+			}
+		}
+		
+	}
 	// The "viewAll" method is called by case 5 in the switch block of the "mainMenu
 	// method. It uses a for each loop and the toString() method to display all
 	// elements
 	// in the object array declared in the Index class.
 	public static void viewAll() {
+		//Sort array in ascending order.
+		sortArray();
+
 		for (Object entry : Index.phoneBookArray) {
 			System.out.println(entry.toString() + "\n-------------------------");
 		}
@@ -245,63 +266,170 @@ public class Methods {
 		continueUsing();
 	}
 
-	public static void addEntry() {
+	public static void chooseEntryMethod() {
+		//Two options are given for adding a new Person object to the phone book. 
+		//The first allows a new entry to be created using a one-line input method
+		//assuming the user follows the instructions provided.
+		//The second option allows the user to assign Person object attributes one
+		//by one using setter methods.
+		System.out.println("Choose your entry method:\n"
+				+ "----------------------------------------------------------------\n"
+				+ "1. Enter the contact information on one line exactly as follows:\n" 
+				+ "First, Middle, Last, Street, Telephone Number, Street Address, City, State, Zip Code\n"
+				+ "***Note*** Do not use periods to abbreviate (i.e. St. Loius, 123 Main St.) Enter 'none' if no middle name.\n"
+				+ "Example: Jim, Jeffrey, Jones, 2124567890, 123 Main St, St Loius, MO, 65847\n"
+				+ "----------------------------------------------------------------\n"
+				+ "2. Enter each parameter individually, one by one."
+				+ "----------------------------------------------------------------\n");
+		//Collect input to be used in the upcoming switch statement.
+		int entryMethod = Index.in.nextInt();
+		
+		switch (entryMethod) {
+		//Case one calls the method allowing one-line new entries to be created.
+		case 1: 
+			oneLineAdd();
+			break;
+		//Case two calls an entry method which uses Person object attribute set
+		//methods to populate attribute values one-by-one.	
+		case 2: 
+			addEntryParam();
+			break;
+		default:
+			//The default case redirects back to the start of the method and prompts 
+			//the user to try again if "1" or "2" are not chosen.
+			System.out.println("Please choose option 1 or option 2 and try again.");
+			chooseEntryMethod();
+		}
+	}
+	
+	public static void oneLineAdd() {
+		//Provide detailed instructions for the user to successfully use the one-line
+		//entry method.
+		System.out.print(
+		"Enter the contact information on one line exactly as follows:\n"
+		+ "First, Middle, Last, Street, Telephone Number, Street Address, City, State, Zip Code\n"
+		+ "***Note*** Do not use periods to abbreviate (i.e. St. Loius, 123 Main St.)\n "
+		+ "Enter 'none' if no middle name.\n"
+		+ "Example: Jim, (none), Jones, 2124567890, 123 Main St, St Loius, MO, 65847\n"
+		+ "------------------------------------------------------------------------------------\n"
+		+ "Your entry: ");
+
+		//Create a local scanner to mitigate an error which occurs when the global
+		//scanner is used.
+		@SuppressWarnings("resource")
+		Scanner input = new Scanner(System.in);
+		//Collect user input for one-line entry.
+		String newContact = input.nextLine();
+
+		//Split the entered string at each comma ',' which will be assigned as elements
+		//in an array to be used later with a parameterized constructor.
+		String[] entryArray = newContact.split(", ");
+		//Name the new variables/string splits and assign them to index positions in the 
+		//entry array.
+		String firstName = entryArray[0];
+		String middleName = entryArray[1];
+		String lastName = entryArray[2];
+		String phone = entryArray[3];
+		String street = entryArray[4];
+		String city = entryArray[5];
+		String state = entryArray[6];
+		String zipCode = entryArray[7];
+		
+		//Create temporary object array with an index 1 size larger than the phone book array in the Index class.
+		int indexPlus = Index.phoneBookArray.length + 1;
+		//Initialize temporary array.
+		Person[] tempArray = new Person[indexPlus];
+		//Create new person object using parameterized constructor.
+		Person addContact = new Person(firstName, middleName, lastName, phone, street, city, state, zipCode);
+
+		// Copy the array from the Index class into the temporary array using for loop.
+		int i;
+		for (i = 0; i < Index.phoneBookArray.length; i++) {
+			tempArray[i] = Index.phoneBookArray[i];
+		}
+		//Copy new Person object into temporary array.
+		tempArray[i] = addContact;
+		
+		// Copy temporary array to phone book array in the Index class.
+		Index.phoneBookArray = tempArray;
+		// Print new entry and confirm it has been added to the phone book.
+		System.out.println(addContact.toString() + "\n ***The entry has been added to the phone book***\n");
+		// Ask the user whether to continue using the phone book, and return to the
+		// main menu if "Y" is entered.
+		continueUsing();
+		//Close the scanner object.
+		input.close();
+		
+		}
+	
+	public static void addEntryParam() {
+		//Create local scanner object to be used for this method only. The global scanner
+		//causes issues when attributes are printed line by line.
+		@SuppressWarnings("resource")
+		Scanner entry = new Scanner(System.in);
 		// Create new person object to be added to the phone book array.
-		Person entry3 = new Person();
+		Person addContact = new Person();
 
 		System.out.println("\n***Add New Phone Book Entry***");
 
 		// Collect user input and assign to the new Person object using setters.
 		System.out.println("Enter first name: ");
-		entry3.setFirstName(Index.in.next());
+		addContact.setFirstName(entry.next());
 
 		System.out.println("Enter middle name (or \"none\"): ");
-		entry3.setMiddleName(Index.in.next());
+		addContact.setMiddleName(entry.next());
 
 		System.out.println("Enter last name: ");
-		entry3.setLastName(Index.in.next());
+		addContact.setLastName(entry.next());
 
 		System.out.println("Enter telephone number in the following format: (123) 456-7890: ");
-		entry3.setTelephoneNumber(Index.in.next());
+		addContact.setTelephoneNumber(entry.next());
 
 		System.out.println("Enter street address: ");
-		entry3.setStreet(Index.in.next());
+		addContact.setStreet(entry.next());
 
 		System.out.println("Enter city: ");
-		entry3.setCity(Index.in.next());
+		addContact.setCity(entry.next());
 
 		System.out.println("Enter state: ");
-		entry3.setState(Index.in.next());
+		addContact.setState(entry.next());
 
 		System.out.println("Enter zip code: ");
-		entry3.setZipCode(Index.in.next());
+		addContact.setZipCode(entry.next());
 
 		// Create temporary array for storing existing elements plus the new Person
 		// object.
-		Person[] addEntryArray = new Person[4];
+		Person[] tempArray = new Person[4];
 
 		// Copy the array from the Index class into the temporary array using for loop.
 		int i;
 		for (i = 0; i < Index.phoneBookArray.length; i++) {
-			addEntryArray[i] = Index.phoneBookArray[i];
+			tempArray[i] = Index.phoneBookArray[i];
 		}
-		// Copy new Person object into temporary array.
-		addEntryArray[i] = entry3;
+		//Copy new Person object into temporary array.
+		tempArray[i] = addContact;	
+		
 		// Copy temporary array to phone book array in the Index class.
-		Index.phoneBookArray = addEntryArray;
-		// Print new array and confirm it has been added to the phone book.
-		System.out.println(entry3.toString() + "\n ***The entry has been added to the phone book***\n");
+		Index.phoneBookArray = tempArray;
+		// Print new entry and confirm it has been added to the phone book.
+		System.out.println(addContact.toString() + "\n ***The entry has been added to the phone book***\n");
 		// Ask the user whether to continue using the phone book, and return to the
 		// main menu if "Y" is entered.
 		continueUsing();
+		//Close the scanner object.
+		entry.close();
 	}
 
 	public static void updateEntry() {
-		System.out.println("Select a contact to edit by choosing its number.\n");
+		//Sort array before displaying Person object entries.
+		sortArray();
+		
 		// Display a numbered list of Person objects for the user to select from.
+		System.out.println("Select a contact to edit by choosing its number.\n");
+		
 		int num = 1;
 		for (Object entry : Index.phoneBookArray) {
-			System.out.println(num + ". " + entry);
+			System.out.println(num + ". " + entry + "\n--------------------------");
 			num++;
 		}
 		int contact = Index.in.nextInt();
@@ -394,6 +522,8 @@ public class Methods {
 	}
 
 	public static void deleteEntry() {
+		//Sort array in ascending order.
+		sortArray();
 		// Prompt user to select a contact to delete.
 		System.out.println("Select a contact to delete by choosing its number.\n");
 		// Print a numbered list of Person objects using for each loop.
